@@ -18,9 +18,66 @@ knitr::opts_chunk$set(
 library(SemesterProject7709)
 ```
 
-Hello this is my first lab.
+Download the Lab1_data.xlsx data file. This file contains fake data for a 2x3x2 repeated measures design, for 10 participants. The data is in wide format. Here is the link.
+
+<https://github.com/CrumpLab/rstatsmethods/raw/master/vignettes/Stats2/Lab1_data.xlsx>
+
+Your task is to convert the data to long format, and store the long-format data in a data.frame or tibble. Print out some of the long-form data in your lab1.Rmd, to show that you did make the appropriate conversion. For extra fun, show two different ways to solve the problem.
+
+If you need to modify the excel by hand to help you solve the problem that is OK, just make a note of it in your lab work.
+
+## Solution
 
 ```{r}
-1+1
+# read in data
+library(readxl)
+
+wide_data <- read_xlsx("data/Lab1_data.xlsx")
+
+# need to handle the column headers
+
+# input only column headers
+wide_headers <- read_xlsx("data/Lab1_data.xlsx",
+                          range = "B1:M3", 
+                          col_names=FALSE)
+
+# extract individual levels, and repeat level to fill design
+IV1 <- as.character(wide_headers[1,])
+IV1 <- IV1[is.na(IV1) == FALSE]
+IV1 <- rep(IV1, each = 6)
+
+IV2 <- as.character(wide_headers[2,])
+IV2 <- IV2[is.na(IV2) == FALSE]
+IV2 <- rep(IV2, 2)
+
+IV3 <- as.character(wide_headers[3,])
+IV3 <- IV3[is.na(IV3) == FALSE]
+
+# create a single row version of column headers
+one_row_header <- paste(IV1,IV2,IV3, sep="_")
+
+# read in data again, skipping unnecessary column headers
+
+wide_data <- read_xlsx("data/Lab1_data.xlsx", skip = 2)
+
+# replace names with new column headers 
+
+names(wide_data)[2:13] <- one_row_header
+
+# use pivot_longer to convert to long
+
+library(tidyr)
+
+long_data <- wide_data %>% pivot_longer(
+  cols = 2:13,
+  names_to = c("Loudness","Time","Letter"),
+  names_pattern = "(.*)_(.*)_(.*)",
+  values_to = "DV"
+)
+
+knitr::kable(head(long_data))
 ```
+
+
+
 

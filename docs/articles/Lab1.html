@@ -80,15 +80,143 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">SemesterProject7709</span><span class="op">)</span></code></pre></div>
-<p>Hello this is my first lab.</p>
+<p>Download the Lab1_data.xlsx data file. This file contains fake data for a 2x3x2 repeated measures design, for 10 participants. The data is in wide format. Here is the link.</p>
+<p><a href="https://github.com/CrumpLab/rstatsmethods/raw/master/vignettes/Stats2/Lab1_data.xlsx" class="external-link uri">https://github.com/CrumpLab/rstatsmethods/raw/master/vignettes/Stats2/Lab1_data.xlsx</a></p>
+<p>Your task is to convert the data to long format, and store the long-format data in a data.frame or tibble. Print out some of the long-form data in your lab1.Rmd, to show that you did make the appropriate conversion. For extra fun, show two different ways to solve the problem.</p>
+<p>If you need to modify the excel by hand to help you solve the problem that is OK, just make a note of it in your lab work.</p>
+<div class="section level2">
+<h2 id="solution">Solution<a class="anchor" aria-label="anchor" href="#solution"></a>
+</h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fl">1</span><span class="op">+</span><span class="fl">1</span>
-<span class="co">#&gt; [1] 2</span></code></pre></div>
+<code class="sourceCode R"><span class="co"># read in data</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://readxl.tidyverse.org" class="external-link">readxl</a></span><span class="op">)</span>
+
+<span class="va">wide_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_xlsx</a></span><span class="op">(</span><span class="st">"data/Lab1_data.xlsx"</span><span class="op">)</span>
+<span class="co">#&gt; New names:</span>
+<span class="co">#&gt; * `` -&gt; ...1</span>
+<span class="co">#&gt; * `` -&gt; ...3</span>
+<span class="co">#&gt; * `` -&gt; ...4</span>
+<span class="co">#&gt; * `` -&gt; ...5</span>
+<span class="co">#&gt; * `` -&gt; ...6</span>
+<span class="co">#&gt; * ...</span>
+
+<span class="co"># need to handle the column headers</span>
+
+<span class="co"># input only column headers</span>
+<span class="va">wide_headers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_xlsx</a></span><span class="op">(</span><span class="st">"data/Lab1_data.xlsx"</span>,
+                          range <span class="op">=</span> <span class="st">"B1:M3"</span>, 
+                          col_names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="co">#&gt; New names:</span>
+<span class="co">#&gt; * `` -&gt; ...1</span>
+<span class="co">#&gt; * `` -&gt; ...2</span>
+<span class="co">#&gt; * `` -&gt; ...3</span>
+<span class="co">#&gt; * `` -&gt; ...4</span>
+<span class="co">#&gt; * `` -&gt; ...5</span>
+<span class="co">#&gt; * ...</span>
+
+<span class="co"># extract individual levels, and repeat level to fill design</span>
+<span class="va">IV1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">wide_headers</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">)</span>
+<span class="va">IV1</span> <span class="op">&lt;-</span> <span class="va">IV1</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">IV1</span><span class="op">)</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">]</span>
+<span class="va">IV1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">IV1</span>, each <span class="op">=</span> <span class="fl">6</span><span class="op">)</span>
+
+<span class="va">IV2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">wide_headers</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
+<span class="va">IV2</span> <span class="op">&lt;-</span> <span class="va">IV2</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">IV2</span><span class="op">)</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">]</span>
+<span class="va">IV2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">IV2</span>, <span class="fl">2</span><span class="op">)</span>
+
+<span class="va">IV3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">wide_headers</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span><span class="op">)</span>
+<span class="va">IV3</span> <span class="op">&lt;-</span> <span class="va">IV3</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">IV3</span><span class="op">)</span> <span class="op">==</span> <span class="cn">FALSE</span><span class="op">]</span>
+
+<span class="co"># create a single row version of column headers</span>
+<span class="va">one_row_header</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">IV1</span>,<span class="va">IV2</span>,<span class="va">IV3</span>, sep<span class="op">=</span><span class="st">"_"</span><span class="op">)</span>
+
+<span class="co"># read in data again, skipping unnecessary column headers</span>
+
+<span class="va">wide_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">read_xlsx</a></span><span class="op">(</span><span class="st">"data/Lab1_data.xlsx"</span>, skip <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; New names:</span>
+<span class="co">#&gt; * A -&gt; A...2</span>
+<span class="co">#&gt; * B -&gt; B...3</span>
+<span class="co">#&gt; * A -&gt; A...4</span>
+<span class="co">#&gt; * B -&gt; B...5</span>
+<span class="co">#&gt; * A -&gt; A...6</span>
+<span class="co">#&gt; * ...</span>
+
+<span class="co"># replace names with new column headers </span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">wide_data</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">one_row_header</span>
+
+<span class="co"># use pivot_longer to convert to long</span>
+
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+
+<span class="va">long_data</span> <span class="op">&lt;-</span> <span class="va">wide_data</span> <span class="op"><a href="https://tidyr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>
+  cols <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">13</span>,
+  names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Loudness"</span>,<span class="st">"Time"</span>,<span class="st">"Letter"</span><span class="op">)</span>,
+  names_pattern <span class="op">=</span> <span class="st">"(.*)_(.*)_(.*)"</span>,
+  values_to <span class="op">=</span> <span class="st">"DV"</span>
+<span class="op">)</span>
+
+<span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">long_data</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">Participant</th>
+<th align="left">Loudness</th>
+<th align="left">Time</th>
+<th align="left">Letter</th>
+<th align="right">DV</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Morning</td>
+<td align="left">A</td>
+<td align="right">61</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Afternoon</td>
+<td align="left">B</td>
+<td align="right">77</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Evening</td>
+<td align="left">A</td>
+<td align="right">97</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Morning</td>
+<td align="left">B</td>
+<td align="right">97</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Afternoon</td>
+<td align="left">A</td>
+<td align="right">89</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Noisy</td>
+<td align="left">Evening</td>
+<td align="left">B</td>
+<td align="right">94</td>
+</tr>
+</tbody>
+</table>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-      </div>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
+</div>
 
 </div>
 
