@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE,
+  warning = FALSE
 )
 ```
 
@@ -48,7 +50,7 @@ IV1 <- rep(IV1, each = 6)
 
 IV2 <- as.character(wide_headers[2,])
 IV2 <- IV2[is.na(IV2) == FALSE]
-IV2 <- rep(IV2, 2)
+IV2 <- rep(IV2, each=2)
 
 IV3 <- as.character(wide_headers[3,])
 IV3 <- IV3[is.na(IV3) == FALSE]
@@ -78,6 +80,94 @@ long_data <- wide_data %>% pivot_longer(
 knitr::kable(head(long_data))
 ```
 
+## other solutions
 
+```{r}
+# create IVs by hand
+Loudness <- rep( rep(c("Noisy","Quiet"),each=6), 10)
+Time     <- rep( rep(rep(c("Morning","Afternoon","Evening"),each=2),2), 10)
+Letter   <- rep( rep(c("A","B"),6), 10)
+Participant <- rep(1:10, each = 12)
+
+#load rectangle containing data
+wide_data <- read_xlsx("data/Lab1_data.xlsx",
+                          range = "B4:M13", 
+                          col_names=FALSE)
+
+# convert matrix to a single vector (concatenate)
+long_dv <- c(t(as.matrix(wide_data)))
+
+#assemble data.frame
+
+long_data <- data.frame(Participant,
+                        Loudness,
+                        Time, 
+                        Letter,
+                        DV=long_dv)
+
+head(long_data)
+```
+
+Using loops and logic, and a minimum of other functions
+
+```{r}
+# load data
+
+wide_data <- read_xlsx("data/Lab1_data.xlsx",col_names = FALSE)
+wide_data <- as.data.frame(wide_data)
+
+# Create vectors of level names for each IV
+# use a for loop to process the first three rows of wide_data
+
+Loudness <- c()
+Time <- c()
+Letter <- c()
+for (i in 2:13) {
+  
+  if ( is.na(wide_data[1,i]) == FALSE ) Loudness[i-1] <- wide_data[1,i]
+  if ( is.na(wide_data[1,i]) == TRUE ) Loudness[i-1] <- Loudness[i-2]
+  
+  if ( is.na(wide_data[2,i]) == FALSE ) Time[i-1] <- wide_data[2,i]
+  if ( is.na(wide_data[2,i]) == TRUE ) Time[i-1] <- Time[i-2]
+  
+  if ( is.na(wide_data[3,i]) == FALSE ) Letter[i-1] <- wide_data[3,i]
+  if ( is.na(wide_data[3,i]) == TRUE ) Letter[i-1] <- Letter[i-2]
+}
+
+# Create a long data frame using a for loop
+
+long_data <-  data.frame()
+
+for(i in 4:13){ # rows
+  for(j in 2:13) { # columns
+    temp_row <- data.frame(Participant = wide_data[i,1],
+                           Loudness = Loudness[j-1],
+                           Time = Time[j-1],
+                           Letter = Letter[j-1],
+                           DV = wide_data[i,j])
+    long_data <- rbind(long_data,temp_row)
+  }
+}
+
+head(long_data)
+
+```
+Using the `zoo:na.locf` function to fill level names to the right. This uses only a few lines, but it comes at the expense of low readability, and lots of nested function calls that are hard to parse and understand.
+
+```{r}
+wide_data <- as.data.frame(read_xlsx("data/Lab1_data.xlsx",col_names = FALSE))
+the_scores <- wide_data[4:13,1:13]
+names(the_scores) <- c(wide_data[3,1],apply(zoo::na.locf(t(wide_data[1:3,2:13])),1,paste, collapse="_"))
+
+long_data <- the_scores %>% pivot_longer(
+  cols = 2:13,
+  names_to = c("Loudness","Time","Letter"),
+  names_pattern = "(.*)_(.*)_(.*)",
+  values_to = "DV"
+)
+
+head(long_data)
+
+```
 
 
