@@ -1,0 +1,26 @@
+---
+title: "Lab3"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Lab3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SemesterProject7709)
+```
+
+
+
+
+
+
+
