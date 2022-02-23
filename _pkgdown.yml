@@ -1,4 +1,18 @@
-url: ~
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [articles, Rbasics, pkgdowntips, reference, tutorials, news]
+    right: [search, github]
+  components:
+     Rbasics:
+      text: R basics
+      menu:
+      - text: My r basics page
+        href: articles/Rbasics/Rbasics.html
+     pkgdowntips:
+      text: Pkgdown tips
+      menu:
+      - text: pkgdown tips
+        href: articles/pkgdownTips/tips.html

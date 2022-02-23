@@ -22,7 +22,13 @@
     <loc>/articles/Lab3.html</loc>
   </url>
   <url>
+    <loc>/articles/Rbasics/Rbasics.html</loc>
+  </url>
+  <url>
     <loc>/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>/articles/pkgdownTips/tips.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
