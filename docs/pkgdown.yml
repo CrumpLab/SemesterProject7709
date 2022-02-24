@@ -1,5 +1,5 @@
-pandoc: '2.16'
-pkgdown: 2.0.1
+pandoc: 2.14.0.3
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   Lab1: Lab1.html
@@ -7,5 +7,5 @@ articles:
   Lab3: Lab3.html
   Rbasics: Rbasics/Rbasics.html
   tips: pkgdownTips/tips.html
-last_built: 2022-02-23T17:14Z
+last_built: 2022-02-24T18:59Z
 

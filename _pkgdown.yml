@@ -1,18 +1,28 @@
+# This file controls site layout and style
+# For more details see: https://pkgdown.r-lib.org/articles/customise.html
+
 template:
   bootstrap: 5
 
 navbar:
   structure:
-    left:  [articles, Rbasics, pkgdowntips, reference, tutorials, news]
+    left:  [articles, Rbasics, pkgdowntips, reference]
     right: [search, github]
   components:
+     articles:
+      text: Articles
+      menu:
+      - text: Lab1
+        href: articles/Lab1.html
+      - text: Lab2
+        href: articles/Lab2.html
+      - text: Lab3
+        href: articles/Lab3.html
      Rbasics:
       text: R basics
       menu:
       - text: My r basics page
         href: articles/Rbasics/Rbasics.html
      pkgdowntips:
-      text: Pkgdown tips
-      menu:
-      - text: pkgdown tips
+        text: pkgdown tips
         href: articles/pkgdownTips/tips.html

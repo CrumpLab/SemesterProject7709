@@ -1,8 +1,8 @@
 ---
-title: "tips"
+title: "pkgdown tips"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{tips}
+  %\VignetteIndexEntry{pkgdown tips}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -10,10 +10,129 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = FALSE
 )
 ```
 
-```{r setup}
-library(SemesterProject7709)
+## What is pkgdown?
+
+[pkgdown](https://pkgdown.r-lib.org/index.html) is an R package that automatically compiles R packages into websites. 
+
+In order to use pkgdown, you should be working inside an R Studio project containing an R Package skeleton template.
+
+## Basic usage
+
+NOTE: in general you will be running pkgdown functions in the console, and not in your .Rmd documents.
+
+### build_site() compile the whole website
+
+`pkgdown::build_site()` compiles your entire R package project into a pkgdown website and saves all of the web files in the `docs` folder.
+
+```{r}
+# run this in the console
+pkgdown::build_site()
 ```
+
+If you push your R project with a compiled website to Github.com, then you can view the webpage by enabling the github pages option (and choosing to load from docs folder).
+
+### build_home() compile the front page
+
+`pkgdown::build_home()` re-compiles just the front page. The updated web files will be saved to your `docs` folder. This function can be useful to test changes to the styling of the website. Or, if you are simply changing something on the landing page, and you don't want to recompile everything else, then this is all that is needed.
+
+```{r}
+# run this in the console
+pkgdown::build_home()
+```
+
+### build_articles() compile all vignettes
+
+`pkgdown::build_articles()` knits all of the .Rmd documents in the `vignettes` folder, and saves the `.html` files to the `docs` folder. Note, this function will only re-knit .Rmd files that have changed since the last time they were compiled.
+
+```{r}
+# run this in the console
+pkgdown::build_articles()
+```
+
+
+### Additional build functions
+
+There are a few more build functions you might find useful, check them out here:
+
+<https://pkgdown.r-lib.org/reference/index.html#build>
+
+### clean_site() 
+
+`pkgdown::clean_site()` deletes all of the files in the `docs` folder. If you are running into a bug or problem, it may be due to leftover files in the `docs` folder from a previous build. This function lets you start fresh. After running `pkgdown::clean_site()`, try re-running `pkgdown::build_site()` to rebuild everything.
+
+```{r}
+# run this in the console
+pkgdown::clean_site()
+```
+
+
+## Advanced tips
+
+### Vignettes
+
+If you create a `vignettes` folder, then any .Rmd files in that folder will be knitted into html files that are saved in the `docs` folder. Additionally, by default there will be an `articles` tab inserted into the website, and that tab will list all of the .Rmd documents that were knit from the `vignettes` folder. Knitting occurs when running `pkgdown::build_site()`, or `pkgdown::articles()`
+
+### Customizing the navbar
+
+The navigation bar at the top of website will show default tabs set by pkgdown. For example, if you have a `vignettes` folder with `.Rmd`s in it, then your website will by default have an `articles` tab that lists all of the titles for your `Rmd`s. There are a few other tabs that pkgdown will generate if you make use of the options (e.g., the news tab, or tutorials tab).
+
+It is possible to customize the naming of the tabs, make new tabs, and make your own links within each tab. The customization occurs by modifying the `navbar` object in the `_pkgdown.yml` file. 
+
+You may find it necessary to completely customize your navbar to prevent some nuisances from occurring. I illustrate this below with two examples of coding the navbar object. 
+
+In the first example, all .Rmds in the vignettes folder are knitted and added to the articles tab. This causes some redundancies because the vignettes folder has two subfolders that are intended for separate files. Specifically, there is an` Rbasics` folder, and a `pkgdownTips` folder each containing an .Rmd. The intention for the website is to display labs in the articles tab, and make separate tabs for Rbasics and pkgdown tips. The code below makes the new tabs for Rbasics and pkgdown tips, and links to their respective pages. The minor nuisance is that both the Rbasics and pkgdown tips pages are redundantly listed in the articles tab.
+
+```
+navbar:
+  structure:
+    left:  [articles, Rbasics, pkgdowntips, reference]
+    right: [search, github]
+  components:
+     Rbasics:
+      text: R basics
+      menu:
+      - text: My r basics page
+        href: articles/Rbasics/Rbasics.html
+     pkgdowntips:
+        text: pkgdown tips
+        href: articles/pkgdownTips/tips.html
+```
+
+A fix to the redundant listing of .Rmds in the vignettes folder is to **fully-customize** your navbar. This requires that you explicitly declare each tab and page yourself. Note, the `pkgdown::template_navbar()` can be helpful here. For example, In the code below I added the `articles` object underneath `components`, then listed Lab 1 to Lab 3, and did not list anything else. I did not write this by hand, instead I copy and pasted it from the output of `pkgdown::template_navbar()`.
+
+```
+navbar:
+  structure:
+    left:  [articles, Rbasics, pkgdowntips, reference]
+    right: [search, github]
+  components:
+     articles:
+      text: Articles
+      menu:
+      - text: Lab1
+        href: articles/Lab1.html
+      - text: Lab2
+        href: articles/Lab2.html
+      - text: Lab3
+        href: articles/Lab3.html
+     Rbasics:
+      text: R basics
+      menu:
+      - text: My r basics page
+        href: articles/Rbasics/Rbasics.html
+     pkgdowntips:
+        text: pkgdown tips
+        href: articles/pkgdownTips/tips.html
+```
+
+
+
+
+
+
+
