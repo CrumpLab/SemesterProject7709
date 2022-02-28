@@ -1,0 +1,200 @@
+---
+title: "Styling tips"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Styling tips}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+css: extra.css
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+This is plain text. Plain text gets converted to markdown, and then html.
+
+---
+
+<p> This is HTML text written inside a `<p>` element. It is possible to write any HTML directly into an .Rmd document </p>
+
+```
+<p> This is HTML text written inside a `<p>` element. It is possible to write any HTML directly into an .Rmd document </p>
+```
+
+---
+
+<div> 
+<p> This is a paragraph inside a `<div>` element </p>
+</div>
+
+```
+<div> 
+<p> This is a paragraph inside a `<div>` element </p>
+</div>
+```
+
+---
+
+<div style = "color:red;"> 
+<p> This is a paragraph inside a `<div>` element using style to set a color property</p>
+</div>
+
+```
+<div style = "color:red;"> 
+<p> This is a paragraph inside a `<div>` element using style to set a color property</p>
+</div>
+```
+
+---
+
+<div class = "myStyle"> 
+<p> This is a paragraph inside a `<div>` element with styling controlled by `myStyle` defined in `style.css`. NOTE, this does not work in pkgdown. </p>
+</div>
+
+```
+<div class="myStyle"> 
+<p> This is a paragraph inside a `<div>` element with styling controlled by `myStyle` defined in `style.css`. NOTE, this does not work in pkgdown. </p>
+</div>
+```
+
+---
+
+<div class = "extraStyle"> 
+<p> This is a paragraph inside a `<div>` element with styling controlled by `myStyle` defined in `extra.css` </p>
+</div>
+
+```
+<div class = "extraStyle"> 
+<p class = "extraStyle"> This is a paragraph inside a `<div>` element with styling controlled by `myStyle` defined in `extra.css` </p>
+</div>
+```
+
+To use this option, you must create a `pkgdown` folder in your main project folder, then put `extra.css` into the folder, e.g. (`pkgdown/extra.css`). This file is used to declare css (cascading style sheet) rules for styling html elements.
+
+```
+.extraStyle {
+  color: red!important;
+  font-size: 26pt!important;
+}
+
+```
+
+---
+
+R markdown supports "fenced divs", which are a fast way to create divs and associate them with particular style classes
+
+::: {.extraStyle}
+
+This is in a fenced div
+
+:::
+
+```
+::: {.extraStyle}
+
+This is in a fenced div
+
+:::
+```
+
+---
+
+## Bootstrap 5
+
+Bootstrap 5 is a programmatic way to style web pages. Go to the bootstrap 5 documentation and search for style classes or elements that you want to insert. Then, use fenced divs to insert them
+
+<https://getbootstrap.com/docs/5.1/getting-started/introduction/>
+
+---
+
+::: {.fs-1}
+
+Setting font size to `.fs-1`
+
+:::
+
+```
+::: {.fs-1}
+
+Setting font size to `.fs-1`
+
+:::
+```
+
+---
+
+::: {.fs-2}
+
+Setting font size to `.fs-2`
+
+:::
+
+```
+::: {.fs-2}
+
+Setting font size to `.fs-2`
+
+:::
+```
+
+---
+
+Using Boostrap 5 classes for multi-column text
+
+::: {.row}
+:::: {.col-6}
+This is the text that will be written in the first column. Blah blah blah, etc. and some more stuff.
+::::
+
+:::: {.col-6}
+This is the text that will be written in the second column. Blah blah blah, etc. and some more stuff.
+::::
+:::
+
+```
+::: {.row}
+:::: {.col-6}
+This is the text that will be written in the first column. Blah blah blah, etc. and some more stuff.
+::::
+
+:::: {.col-6}
+This is the text that will be written in the second column. Blah blah blah, etc. and some more stuff.
+::::
+:::
+```
+
+---
+
+Change relative widths of columns (add up to 12)
+
+::: {.row}
+:::: {.col-9}
+This is the text that will be written in the first column. Blah blah blah, etc. and some more stuff.
+::::
+
+:::: {.col-3}
+This is the text that will be written in the second column. Blah blah blah, etc. and some more stuff.
+::::
+:::
+
+```
+::: {.row}
+:::: {.col-9}
+This is the text that will be written in the first column. Blah blah blah, etc. and some more stuff.
+::::
+
+:::: {.col-3}
+This is the text that will be written in the second column. Blah blah blah, etc. and some more stuff.
+::::
+:::
+```
+
+
+
+
+

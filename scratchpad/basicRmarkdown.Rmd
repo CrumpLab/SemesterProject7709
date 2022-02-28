@@ -1,0 +1,23 @@
+---
+title: "Basic R Markdown"
+author: "Matt Crump"
+date: "2/28/2022"
+css: style.css
+output:
+  html_document:
+    self_contained: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a simple R markdown document, using the  R markdown template. Knitting this document creates a html file. 
+
+The style of the html file can be controlled by an associated css file.
+
+::: {.myStyle}
+This line is styled 
+:::
+
+

@@ -1,6 +1,9 @@
 # This file controls site layout and style
 # For more details see: https://pkgdown.r-lib.org/articles/customise.html
 
+pkgdown:
+  as_is: true
+
 template:
   bootstrap: 5
 
@@ -24,5 +27,9 @@ navbar:
       - text: My r basics page
         href: articles/Rbasics/Rbasics.html
      pkgdowntips:
-        text: pkgdown tips
+      text: pkgdown tips
+      menu:
+      - text: pkgdown tips
         href: articles/pkgdownTips/tips.html
+      - text: styling tips
+        href: articles/pkgdownTips/styling.html
