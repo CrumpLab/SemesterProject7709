@@ -1,0 +1,83 @@
+---
+title: "lab4"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab4}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+1. prove t test and anova are the same.
+
+```{r}
+library(tidyverse)
+
+example_data <- tibble(Group = rep(c("A","B"), each = 5),
+                       DV = c(2,4,3,5,4,7,6,5,6,7))
+
+t_object <- t.test(DV~Group, data = example_data, var.equal=TRUE)
+
+aov_object <- aov(DV~Group, data=example_data)
+
+class(t_object)
+class(aov_object)
+
+summary(t_object)
+sum_aov <- summary(aov_object)
+
+t_object
+aov_object
+
+# are the p-values the same?
+
+t_object$p.value
+sum_aov[[1]]$`Pr(>F)`[1]
+
+t_object$p.value == sum_aov[[1]]$`Pr(>F)`[1]
+
+round(t_object$p.value, digits = 10) == round(sum_aov[[1]]$`Pr(>F)`[1], digits = 10)
+
+# are the F and t values the same?
+
+t_object$statistic^2
+sum_aov[[1]]$`F value`[1]
+
+```
+
+```{r}
+library(data.table)
+
+all_data <- fread("data/lab4_data.csv")
+
+all_data$Condition <- as.factor(all_data$Condition)
+levels(all_data$Condition) <- c("Control",
+                                "Reactivation+Tetris", 
+                                "Tetris_only",
+                                "Reactivation_only")
+
+summary(aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, all_data))
+
+aov_object <- aov(Days_One_to_Seven_Number_of_Intrusions ~ Condition, all_data)
+aov_print <- papaja::apa_print(aov_object)
+aov_print$full_result
+
+
+ggplot(all_data, aes(x=Condition, 
+                     y=Days_One_to_Seven_Number_of_Intrusions, 
+                     fill = Condition ))+
+  geom_bar(stat="summary",fun="mean")+
+  geom_point()
+
+```
+
+The main effect of tetris therapy was significant, `r aov_print$full_result`. 
+
+
