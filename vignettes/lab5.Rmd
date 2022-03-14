@@ -1,0 +1,136 @@
+---
+title: "lab5"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab5}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+1. Use pwr package to compute power for anova:
+
+```{r}
+
+#calculate power given k, n, f
+pwr.anova.test(k = 3,
+               n = 10,
+               f = .5,
+               sig.level = .05,
+               power = )
+
+# calcuale n, given, k, f, power
+pwr.anova.test(k = 3,
+               n = ,
+               f = .2,
+               sig.level = .05,
+               power = .8)
+
+```
+
+## BUT what is f?
+
+<https://cran.r-project.org/web/packages/pwr/vignettes/pwr-vignette.html>
+
+2. Eta squared, a measure of effect size for anova
+
+<https://cran.r-project.org/web/packages/effectsize/vignettes/anovaES.html>
+
+```{r}
+library(effectsize)
+library(tibble)
+
+# generate data for anova
+levels <- 3
+n_per_level <- 81
+alternative_data <- tibble(subjects = 1:(levels*n_per_level),
+                           IV = as.factor(rep(1:levels, each = n_per_level)),
+                           DV = c(rnorm(n_per_level, .5, 1),
+                                  rnorm(n_per_level, 0, 1),
+                                  rnorm(n_per_level, 0, 1)
+                           )
+)
+aov.out <- aov(DV ~ IV, data = alternative_data)
+summary_aov <- summary(aov.out)
+summary_aov[[1]]$`Pr(>F)`[1]
+
+# calculate eta_squared from anova object
+effectsize::eta_squared(aov.out)
+
+
+
+```
+
+3. Get a sense of eta-squared
+
+```{r}
+
+run_aov <- function(){
+  # generate data for anova
+levels <- 4
+n_per_level <- 81
+alternative_data <- tibble(subjects = 1:(levels*n_per_level),
+                           IV = as.factor(rep(1:levels, each = n_per_level)),
+                           DV = c(rnorm(n_per_level, .4, 1),
+                                  rnorm(n_per_level, 0, 1),
+                                  rnorm(n_per_level, 0, 1),
+                                  rnorm(n_per_level, 0, 1)
+                           )
+)
+aov.out <- aov(DV ~ IV, data = alternative_data)
+summary_aov <- summary(aov.out)
+return(c(summary_aov[[1]]$`Pr(>F)`[1],
+         effectsize::eta_squared(aov.out, partial=FALSE)$Eta2))
+}
+# run anova simulation
+save_results <- replicate(1000,run_aov())
+
+# proportion significant simulations
+length(which(save_results[1,] < .05))/1000
+
+# effect_size
+hist(save_results[2,])
+mean(save_results[2,])
+
+```
+
+4. Power to detect a 5% increase in a multiple choice test?
+
+```{r}
+run_aov <- function(){
+  groups <- 4
+  n_per_group <- 25
+  num_questions <- 10
+  alternative_data <- tibble(subjects = 1:(groups*n_per_group),
+                             IV = as.factor(rep(1:groups, each = n_per_group)),
+                             DV = c(rbinom(n_per_group,num_questions,.75),
+                                    rbinom(n_per_group,num_questions,.75),
+                                    rbinom(n_per_group,num_questions,.75),
+                                    rbinom(n_per_group,num_questions,.80)
+                             )
+  )
+  aov.out <- aov(DV ~ IV, data = alternative_data)
+  summary_aov <- summary(aov.out)
+  return(c(summary_aov[[1]]$`Pr(>F)`[1],
+           effectsize::eta_squared(aov.out, partial=FALSE)$Eta2))
+}
+
+# run anova simulation
+save_results <- replicate(100,run_aov())
+
+# proportion significant simulations
+length(which(save_results[1,] < .05))/100
+
+# mean_effect size
+mean(save_results[2,])
+
+
+```
+

@@ -1,0 +1,134 @@
+---
+title: "lab5a"
+author: "Matt Crump"
+date: "3/14/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+1. pwr function... compute power for anova.
+
+```{r}
+library(pwr)
+
+pwr.anova.test(k = 3,
+               n = 10,
+               f = .2,
+               sig.level = .05,
+               power = )
+
+pwr.anova.test(k = 3,
+               n = ,
+               f = .25,
+               sig.level = .05,
+               power = .95 )
+
+
+```
+
+```{r}
+library(tibble)
+
+levels <- 4
+n_per_level <- 10
+# repeat the above many times to compute the F-distribution
+
+alternative_data <- tibble(subjects = 1:(levels*n_per_level),
+                           IV = as.factor(rep(1:levels, each = n_per_level)),
+                            DV = c(rnorm(n_per_level, 0, 1),
+                                   rnorm(n_per_level, 0, 1),
+                                   rnorm(n_per_level, 1, 1),
+                                   rnorm(n_per_level, 0, 1)
+                             )
+                      )
+
+aov.out <- aov(DV ~ IV, data = alternative_data)
+
+summary(aov.out)
+
+library(effectsize)
+eta_squared(aov.out)
+
+```
+
+```{r}
+
+make_a_function <- function(){
+  return(1)
+}
+  
+make_a_function()
+
+replicate( 10, make_a_function() )
+```
+
+```{r}
+
+run_simulation <- function(){
+
+  levels <- 4
+  n_per_level <- 10
+  # repeat the above many times to compute the F-distribution
+  
+  alternative_data <- tibble(subjects = 1:(levels*n_per_level),
+                             IV = as.factor(rep(1:levels, each = n_per_level)),
+                              DV = c(rnorm(n_per_level, -.2, 1),
+                                     rnorm(n_per_level, .2, 1),
+                                     rnorm(n_per_level, -.4, 1),
+                                     rnorm(n_per_level, .2, 1)
+                               )
+                        )
+  
+  aov.out <- aov(DV ~ IV, data = alternative_data)
+  summary_out <- summary(aov.out)
+  eta <- eta_squared(aov.out, partial = FALSE)
+  return(eta$Eta2)
+}
+
+run_simulation()
+
+replicate(100,run_simulation())
+
+mean(replicate(100,run_simulation()))
+
+
+
+```
+
+
+```{r}
+
+run_simulation <- function(){
+
+  levels <- 4
+  n_per_level <- 10
+  num_questions <- 150
+  # repeat the above many times to compute the F-distribution
+  
+  alternative_data <- tibble(subjects = 1:(levels*n_per_level),
+                             IV = as.factor(rep(1:levels, each = n_per_level)),
+                              DV = c(rbinom(n_per_level,num_questions,.75)/num_questions,
+                                     rbinom(n_per_level,num_questions,.75)/num_questions,
+                                     rbinom(n_per_level,num_questions,.75)/num_questions,
+                                     rbinom(n_per_level,num_questions,.80)/num_questions
+                               )
+                        )
+  
+  aov.out <- aov(DV ~ IV, data = alternative_data)
+  summary_out <- summary(aov.out)
+  return(summary_out[[1]]$`Pr(>F)`[1])
+}
+
+run_simulation()
+
+ps <- replicate(100,run_simulation())
+
+length(which(ps < .05))/100
+
+```
+
+
+summary_out
