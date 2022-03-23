@@ -9,7 +9,7 @@ template:
 
 navbar:
   structure:
-    left:  [articles, Rbasics, pkgdowntips, reference]
+    left:  [articles, Rbasics, pkgdowntips, slides, reference]
     right: [search, github]
   components:
      articles:
@@ -28,6 +28,11 @@ navbar:
       menu:
       - text: My r basics page
         href: articles/Rbasics/Rbasics.html
+     slides:
+      text: Slides
+      menu:
+      - text: ioslides
+        href: slides/ioslides_demo.html
      pkgdowntips:
       text: pkgdown tips
       menu:

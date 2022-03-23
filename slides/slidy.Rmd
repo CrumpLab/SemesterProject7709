@@ -1,0 +1,67 @@
+---
+title: "my slides"
+author: "Matt Crump"
+date: "3/23/2022"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
+## make a new slide
+
+put text in it
+
+## make another slide
+
+more text
+
+## a slide with an external picture
+
+```{r}
+knitr::include_graphics('imgs/pic.png')
+```
+
+## apa print
+
+```{r}
+a <- t.test(rnorm(10,0,1))
+b <- papaja::apa_print(a)
+```
+
+
+This thing is significant, `r b$full_result`.
+
+## option-command i
+
+add a new code chunk
+
+```{r}
+
+```
+
