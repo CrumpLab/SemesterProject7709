@@ -23,6 +23,12 @@ navbar:
         href: articles/Lab3.html
       - text: Lab4
         href: articles/Lab4.html
+      - text: Lab5
+        href: articles/Lab5.html
+      - text: Lab6
+        href: articles/Lab6.html
+      - text: Lab7
+        href: articles/Lab7.html
      Rbasics:
       text: R basics
       menu:

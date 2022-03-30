@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 1. Use pwr package to compute power for anova:
 
 ```{r}
+library(pwr)
 
 #calculate power given k, n, f
 pwr.anova.test(k = 3,

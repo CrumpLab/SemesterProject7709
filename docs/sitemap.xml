@@ -19,19 +19,34 @@
     <loc>/articles/Lab3.html</loc>
   </url>
   <url>
+    <loc>/articles/Lab7.html</loc>
+  </url>
+  <url>
     <loc>/articles/Rbasics/Rbasics.html</loc>
   </url>
   <url>
     <loc>/articles/index.html</loc>
   </url>
   <url>
+    <loc>/articles/lab 6.html</loc>
+  </url>
+  <url>
     <loc>/articles/lab4.html</loc>
+  </url>
+  <url>
+    <loc>/articles/lab5.html</loc>
+  </url>
+  <url>
+    <loc>/articles/lab5a.html</loc>
   </url>
   <url>
     <loc>/articles/pkgdownTips/styling.html</loc>
   </url>
   <url>
     <loc>/articles/pkgdownTips/tips.html</loc>
+  </url>
+  <url>
+    <loc>/articles/reveal.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>
@@ -44,5 +59,8 @@
   </url>
   <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/slides/ioslides_demo.html</loc>
   </url>
 </urlset>
