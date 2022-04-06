@@ -7,6 +7,7 @@ articles:
   Lab3: Lab3.html
   Lab4: Lab4.html
   Lab7: Lab7.html
+  Lab8: Lab8.html
   Rbasics: Rbasics/Rbasics.html
   lab 6: lab 6.html
   lab5: lab5.html
@@ -14,5 +15,5 @@ articles:
   styling: pkgdownTips/styling.html
   tips: pkgdownTips/tips.html
   reveal: reveal.html
-last_built: 2022-03-30T17:04Z
+last_built: 2022-04-06T16:10Z
 

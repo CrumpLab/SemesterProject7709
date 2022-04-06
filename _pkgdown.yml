@@ -29,6 +29,8 @@ navbar:
         href: articles/Lab6.html
       - text: Lab7
         href: articles/Lab7.html
+      - text: Lab8
+        href: articles/Lab8.html
      Rbasics:
       text: R basics
       menu:

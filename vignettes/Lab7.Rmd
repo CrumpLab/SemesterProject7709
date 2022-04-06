@@ -25,10 +25,10 @@ n <- 10
 factorial_data <- tibble(A = factor(rep(c("L1","L2"), each = n)),
                          B = factor(rep(rep(c("L1","L2"), each=n/2),2)),
                          C = factor(rep(c("A","B","C","D"), each = n/2)),
-                         DV = c(rnorm(n/2,2,1),
+                         DV = c(rnorm(n/2,-2,1),
                                 rnorm(n/2,-2,1),
-                                rnorm(n/2,-2,1),
-                                rnorm(n/2,2,1))
+                                rnorm(n/2,2,1),
+                                rnorm(n/2,4,1))
 )
   
 A_means <- factorial_data %>%
@@ -65,6 +65,37 @@ sum(factorial_data$B_deviations^2)
 sum(factorial_data$straight_cell_deviations^2) # note these are incorrect
 sum(factorial_data$cell_deviations^2)
 sum(factorial_data$DV_deviations^2)
+```
+```{r}
+factorial_data <- factorial_data %>%
+  mutate(score = 1:(n*2))
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_hline(yintercept = mean(factorial_data$DV))+
+  geom_point(aes(y=DV))+
+  geom_segment(aes(xend = score, y=grand_mean, yend = DV), alpha = .9, color="red")
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_bar(aes(y=DV_deviations), fill="red", stat="identity")+
+  geom_bar(aes(y=A_deviations), fill="green", stat="identity", alpha=.5)
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_bar(aes(y=DV_deviations), fill="red", stat="identity")+
+  geom_bar(aes(y=B_deviations), fill="green", stat="identity", alpha=.5)
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_bar(aes(y=DV_deviations), fill="red", stat="identity")+
+  geom_bar(aes(y=cell_deviations), fill="green", stat="identity", alpha=.5)
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_bar(aes(y=DV_deviations), fill="red", stat="identity")+
+  geom_bar(aes(y=(A_deviations+B_deviations)), fill="green", stat="identity", alpha=.5)
+
+ggplot(factorial_data, aes(x=score, shape=A, color=B))+
+  geom_bar(aes(y=DV_deviations), fill="red", stat="identity")+
+  geom_bar(aes(y=(A_deviations+B_deviations+cell_deviations)), fill="green", stat="identity", alpha=.5)
+
+
 ```
 
 
