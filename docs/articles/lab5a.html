@@ -75,6 +75,15 @@
     <a class="dropdown-item" href="../slides/ioslides_demo.html">ioslides</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-posters">Posters</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-posters">
+    <a class="dropdown-item" href="../posters/betterposter/betterposter.html">Better Poster 1</a>
+    <a class="dropdown-item" href="../posters/betterposter2/betterposter2.html">Better Poster 2</a>
+    <a class="dropdown-item" href="../posters/posterdown/posterdown.html">Posterdown</a>
+    <a class="dropdown-item" href="../posters/custom/poster.html">custom</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -160,8 +169,8 @@
 
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aov.out</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##             Df Sum Sq Mean Sq F value Pr(&gt;F)  </span>
-<span class="co">## IV           3  8.448  2.8160   3.279 0.0319 *</span>
-<span class="co">## Residuals   36 30.919  0.8589                 </span>
+<span class="co">## IV           3   7.14  2.3805   2.457 0.0787 .</span>
+<span class="co">## Residuals   36  34.88  0.9688                 </span>
 <span class="co">## ---</span>
 <span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -175,7 +184,7 @@
 <span class="co">## </span>
 <span class="co">## Parameter | Eta2 |       95% CI</span>
 <span class="co">## -------------------------------</span>
-<span class="co">## IV        | 0.21 | [0.01, 1.00]</span>
+<span class="co">## IV        | 0.17 | [0.00, 1.00]</span>
 <span class="co">## </span>
 <span class="co">## - One-sided CIs: upper bound fixed at (1).</span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -211,29 +220,29 @@
 <span class="op">}</span>
 
 <span class="fu">run_simulation</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.03070107</span></code></pre>
+<pre><code><span class="co">## [1] 0.09844271</span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fu">run_simulation</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">##   [1] 0.314865979 0.055328177 0.016420895 0.048348914 0.181901403 0.078322400</span>
-<span class="co">##   [7] 0.123417640 0.051679552 0.088994288 0.115217251 0.065904181 0.313101975</span>
-<span class="co">##  [13] 0.054402768 0.110171353 0.231227490 0.099704528 0.212196145 0.115676726</span>
-<span class="co">##  [19] 0.212904754 0.131648801 0.041301363 0.146925340 0.264770559 0.176336326</span>
-<span class="co">##  [25] 0.052978801 0.218564436 0.045220006 0.150311205 0.080116563 0.018810973</span>
-<span class="co">##  [31] 0.424459132 0.192797225 0.277180099 0.119794309 0.277014647 0.062064913</span>
-<span class="co">##  [37] 0.095160385 0.239449995 0.068123014 0.004993178 0.120803352 0.179304770</span>
-<span class="co">##  [43] 0.074405933 0.098367372 0.076232314 0.056714339 0.158777772 0.023444311</span>
-<span class="co">##  [49] 0.093932443 0.025799657 0.091300114 0.146629287 0.060184251 0.110362930</span>
-<span class="co">##  [55] 0.307555642 0.105522598 0.100356062 0.045780517 0.098701385 0.215213932</span>
-<span class="co">##  [61] 0.235023533 0.065345286 0.039408570 0.039793744 0.218640724 0.059718385</span>
-<span class="co">##  [67] 0.001448534 0.054369298 0.144057482 0.387749249 0.052803022 0.148432191</span>
-<span class="co">##  [73] 0.093901008 0.127205429 0.140277653 0.096070875 0.201044542 0.091233806</span>
-<span class="co">##  [79] 0.134325899 0.032322849 0.182398918 0.258577910 0.327303786 0.134157740</span>
-<span class="co">##  [85] 0.134620579 0.362619113 0.015246053 0.312933313 0.109651871 0.212198165</span>
-<span class="co">##  [91] 0.144107568 0.153612745 0.037266347 0.056750586 0.111414120 0.188834201</span>
-<span class="co">##  [97] 0.218796366 0.253960345 0.118169702 0.147945345</span></code></pre>
+<pre><code><span class="co">##   [1] 0.061346721 0.197429142 0.267158860 0.051134356 0.005749116 0.175675528</span>
+<span class="co">##   [7] 0.097897898 0.170079672 0.173921695 0.141065062 0.028653806 0.416905655</span>
+<span class="co">##  [13] 0.160704237 0.075007555 0.036409901 0.028122269 0.056399029 0.093230338</span>
+<span class="co">##  [19] 0.060986395 0.094978391 0.191224418 0.002399744 0.029832019 0.303655382</span>
+<span class="co">##  [25] 0.149244417 0.020375789 0.064819883 0.236506318 0.021542066 0.241861940</span>
+<span class="co">##  [31] 0.373215203 0.209550033 0.124128741 0.234854572 0.055138027 0.076446316</span>
+<span class="co">##  [37] 0.240165793 0.271462221 0.280976774 0.048300273 0.100456326 0.126727024</span>
+<span class="co">##  [43] 0.140919296 0.130536715 0.309597138 0.122871810 0.132515534 0.083776666</span>
+<span class="co">##  [49] 0.176355115 0.048576778 0.051233605 0.144740911 0.184395007 0.100806387</span>
+<span class="co">##  [55] 0.083654482 0.208289208 0.245967667 0.150032065 0.145790894 0.028061420</span>
+<span class="co">##  [61] 0.050866466 0.059496585 0.104945473 0.055048178 0.278340172 0.216051745</span>
+<span class="co">##  [67] 0.141149077 0.192704659 0.201558058 0.091243958 0.168417021 0.063097552</span>
+<span class="co">##  [73] 0.068471656 0.214699786 0.094306640 0.196337396 0.149066238 0.043422743</span>
+<span class="co">##  [79] 0.201681893 0.344909609 0.105883856 0.094461978 0.156421917 0.130723236</span>
+<span class="co">##  [85] 0.142337969 0.070475447 0.266428330 0.013652118 0.090527379 0.093495566</span>
+<span class="co">##  [91] 0.115647159 0.013106632 0.051162290 0.126218440 0.174933512 0.147021856</span>
+<span class="co">##  [97] 0.106938029 0.163052348 0.120409503 0.086445827</span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fu">run_simulation</span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.1366985</span></code></pre>
+<pre><code><span class="co">## [1] 0.1247344</span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">run_simulation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span><span class="op">{</span>
 
@@ -257,12 +266,12 @@
 <span class="op">}</span>
 
 <span class="fu">run_simulation</span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 4.834401e-06</span></code></pre>
+<pre><code><span class="co">## [1] 0.02494238</span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">100</span>,<span class="fu">run_simulation</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">ps</span> <span class="op">&lt;</span> <span class="fl">.05</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">100</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.95</span></code></pre>
+<pre><code><span class="co">## [1] 0.93</span></code></pre>
 <p>summary_out</p>
   </main>
 </div>

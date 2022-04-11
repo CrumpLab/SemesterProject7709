@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--
+Font-awesome icons ie github or twitter
+-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">
+
+<!--
+Google fonts api stuff
+-->
+
+
+
+<title>Stimulus duration and directed forgetting for pictures of natural scenes</title>
+
+
+<script src="poster_files/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baskervville&family=Cormorant+Garamond&family=EB+Garamond:wght@400;500&family=Lora&family=Merriweather:wght@300&family=PT+Serif&family=Raleway:wght@200;400;800&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href = "bootstrap/css/bootstrap_mod.css">
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+<style>
+@page {
+size: 28in 15.75in;
+margin: 0;
+padding: 0;
+}
+body {
+margin: 0;
+font-size: 175%;
+width: 28in;
+height: 15.75in;
+padding: 0;
+text-align: justify;
+font-family: Palatino;
+}
+.poster_wrap {
+width: 28in;
+height: 15.75in;
+padding: 0cm;
+}
+.title_container {
+width: 28in;
+height: calc(15.75in * 0.15);
+overflow: hidden;
+background-color: #BEAED4;
+border: 0 solid #666666;
+}
+.logo_left {
+float: left;
+width: 10%;
+height: 100%;
+background-color: #BEAED4;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.logo_right {
+float: right;
+width: 10%;
+height: 100%;
+background-color: #BEAED4;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.poster_title {
+text-align: center;
+position: relative;
+float: left;
+width: 80%;
+height: 100%;
+color: #FFFFFF;
+top: 50%;
+transform: translateY(-50%);
+-webkit-transform: translateY(-50%);
+}
+#title {
+font-family: Palatino;
+}
+/* unvisited link */
+a:link {
+color: #F0027F;
+}
+.mybreak {
+  break-before: column;
+}
+/* visited link */
+a:visited {
+color: #F0027F;
+}
+
+/* mouse over link */
+a:hover {
+color: #F0027F;
+}
+
+/* selected link */
+a:active {
+color: #F0027F;
+}
+.poster_body {
+-webkit-column-count: 3; /* Chrome, Safari, Opera */
+-moz-column-count: 3; /* Firefox */
+column-count: 3;
+-webkit-column-fill: auto;
+-moz-column-fill: auto;
+column-fill: auto;
+-webkit-column-rule-width: 1mm;
+-moz-column-rule-width: 1mm;
+column-rule-width: 1mm;
+-webkit-column-rule-style: dashed;
+-moz-column-rule-style: dashed;
+column-rule-style: dashed;
+-webkit-column-rule-color: #BEAED4;
+-moz-column-rule-color: #BEAED4;
+column-rule-color: #BEAED4;
+column-gap: 1em;
+padding-left: 0.5em;
+padding-right: 0.5em;
+height: 100%;
+color: #000000
+background-color: #ffffff;
+}
+.poster_title h1 {
+font-size: 350%;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_body_wrap{
+width: calc(28in + 0 + 0);
+height: calc(15.75in * 0.83);
+padding-top: calc(15.75in * 0.005);
+padding-bottom: calc(15.75in * 0.01);
+background-color: #ffffff;
+}
+.poster_title h3 {
+color: #666666;
+font-size: 170%;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+.poster_title h3 > sup {
+  font-size: 35pt;
+  margin-left: 0.02em;
+}
+.poster_title h5 {
+color: #FFFFFF;
+font-size: ;
+margin: 0;
+border: 0;
+font-weight: normal;
+}
+img {
+margin-top: 2cm;
+margin-bottom: 0;
+}
+.section {
+  padding: 0.2em;
+}
+.poster_body h1 {
+text-align: center;
+color: #FFFFFF;
+font-size: 175%;
+border: 2mm solid #BEAED4;
+background-color: #BEAED4;
+border-radius: 4mm 0mm;
+margin-top: 2mm;
+margin-bottom: 2mm;
+font-weight: normal;
+}
+.poster_body h2 {
+color: #000000;
+font-size: 125%;
+padding-left: 4mm;
+font-weight: normal;
+}
+.span {
+width: 200%;
+}
+/* center align leaflet map,
+from https://stackoverflow.com/questions/52112119/center-leaflet-in-a-rmarkdown-document */
+.html-widget {
+margin: auto;
+position: sticky;
+margin-top: 2cm;
+margin-bottom: 2cm;
+}
+.leaflet.html-widget.html-widget-static-bound.leaflet-container.leaflet-touch.leaflet-fade-anim.leaflet-grab.leaflet-touch-drag.leaflet-touch-zoom {
+position: sticky;
+width: 100%;
+}
+pre.sourceCode.r {
+background-color: #dddddd40;
+border-radius: 4mm;
+padding: 4mm;
+width: 75%;
+/* align-items: center; */
+margin: auto;
+padding-left: 2cm;
+}
+code.sourceCode.r{
+background-color: transparent;
+font-size: 20pt;
+border-radius: 2mm;
+}
+.caption {
+font-size: 25pt;
+}
+.table caption {
+font-size: 25pt;
+padding-bottom: 3mm;
+
+}
+code {
+font-size: 1em;
+font-family: monospace;
+background-color: #66666624;
+color: #BEAED4;
+padding: 1.2mm;
+border-radius: 2mm;
+}
+.poster_title code {
+font-size: 1em;
+}
+table {
+font-size: 40px;
+margin: auto;
+border-top: 3px solid #666;
+border-bottom: 3px solid #666;
+}
+table thead th {
+border-bottom: 3px solid #ddd;
+}
+td {
+padding: 8px;
+}
+th {
+padding: 15px;
+}
+caption {
+margin-bottom: 10px;
+}
+.poster_body p {
+margin-right: 4mm;
+margin-left: 4mm;
+margin-top: 6mm;
+margin-bottom: 10mm;
+}
+.poster_body ol {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+#ul {
+margin-right: 4mm;
+margin-left: 4mm;
+}
+.references p {
+font-size: 20pt;
+}
+.orcid img {
+  width: 1em;
+}
+</style>
+</head>
+<body>
+
+
+<div class="poster_wrap">
+<div class="title_container">
+<!-- Left Logo  -->
+<div class="logo_left">
+<img src= 'imgs/BC_logo.png' style="width: 80%">
+</div>
+<!-- Poster Title -->
+<div class= "poster_title">
+<h1 id="title">Stimulus duration and directed forgetting for pictures of natural scenes</h1>
+<h3 id="author">Patrick Ihejirika<sup>1</sup>, Matthew J. C. Crump<sup>1, <a class="orcid" href="https://orcid.org/0000-0002-5612-0090"><img src="https://raw.githubusercontent.com/brentthorne/posterdown/master/images/orcid.jpg"></a></sup></h3><br>
+<h5 id="affiliation"><sup>1</sup> Department of Psychology, Brooklyn College of CUNY</h5>
+</div>
+<!-- Right Logo  -->
+<div class="logo_right">
+<img src=https://raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png style="width: 80%">
+</div>
+</div>
+
+<div class='poster_body_wrap'>
+<div class='poster_body'>
+<div id="what-is-directed-forgetting" class="section level1">
+<h1>What is Directed Forgetting?</h1>
+<p>Directed forgetting research investigates people’s ability to intentionally forget information <span class="citation">(MacLeod, 1998)</span>. For example, in a memory task for words participants are instructed to remember some words and forget others for a later memory test. A directed forgetting effect is observed when people show worse memory for the words they attempted to forget. Directed forgetting tasks often use word stimuli, and the limitations of intentional forgetting for other kinds of information remain unclear.</p>
+</div>
+<div id="can-people-intentionally-forget-memorable-picture-information" class="section level1">
+<h1>Can people intentionally forget memorable picture information?</h1>
+<p>We are investigating directed forgetting for pictures. The picture-superiority effect suggests that pictures are inherently more memorable than words <span class="citation">(Gehring et al., 1976)</span>. <span class="citation">Standing (1973)</span> showed that people had little difficulty in memorizing over 10,000 pictures.</p>
+<div id="prior-work-limited-directed-forgetting-for-pictures" class="section level2">
+<h2>Prior work: Limited Directed Forgetting for Pictures</h2>
+<p><span class="citation">Ahmad et al. (2019)</span> found <strong>limited directed forgetting for pictures</strong> of natural scenes and everyday objects.</p>
+<div class="row">
+<div class="col-md-6 draw-border">
+<p><img src="imgs/Tan_methods_vertical.png" width="100%" /></p>
+</div>
+<div class="col-md-6">
+<h2 id="prior-results">Prior Results</h2>
+<p>Reproduction of the results from <span class="citation">Ahmad et al. (2019)</span>.</p>
+<p><img src="poster_files/figure-html/unnamed-chunk-2-1.png" width="100%" /></p>
+<ul>
+<li>They found a small directed forgetting effect.</li>
+<li>The effect was only observed for items given a more difficult recognition test, involving a similar (exemplar) lure.</li>
+</ul>
+<h2 id="what-factors-determine-intentional-forgetting-of-pictures">What factors determine intentional forgetting of pictures?</h2>
+</div>
+</div>
+</div>
+</div>
+<div id="are-pictures-easier-to-forget-if-they-are-made-less-memorable" class="section level1">
+<h1>Are pictures easier to forget if they are made less memorable?</h1>
+<div class="row">
+<div class="col-md-6">
+<h2 id="hypothesis">Hypothesis</h2>
+<ol style="list-style-type: decimal">
+<li>We assume that the magnitude of directed forgetting is influenced by stimulus encoding strength:</li>
+</ol>
+<ul>
+<li>Strongly encoded stimuli are harder to forget</li>
+<li>Wakly encoded stimuli are easier to forget</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li><p>We propose that decreasing stimulus duration during encoding will make pictures less well encoded, and easier to forget</p></li>
+<li><p>We predict the directed forgetting effect will increase as stimulus duration decreases.</p></li>
+</ol>
+</div>
+<div class="col-md-6">
+<h2 id="predicted-effect-of-stimulus-duration-manipulation">Predicted effect of stimulus duration manipulation</h2>
+<p><img src="poster_files/figure-html/unnamed-chunk-3-1.png" width="100%" /></p>
+</div>
+</div>
+</div>
+<div id="methods-replication-with-stimulus-duration-manipulation" class="section level1">
+<h1>Methods: Replication with stimulus duration manipulation</h1>
+<div class="row">
+<div class="col-md-6">
+<ul>
+<li>2 close replications of <span class="citation">Ahmad et al. (2019)</span>.</li>
+<li>used the same set of natural scenes</li>
+<li>47 and 45 participants recruited from Amazon’s Mechanical Turk</li>
+</ul>
+</div>
+<div class="col-md-6">
+<ul>
+<li>Programmed the experiment using JsPsych <span class="citation">(De Leeuw, 2015)</span></li>
+<li>Participants completed the experiment in their web-browser</li>
+</ul>
+</div>
+</div>
+<p><img src="imgs/Methods.png" width="891" /></p>
+<p><br></p>
+</div>
+<div id="results-inconsistent-directed-forgetting-effects" class="section level1">
+<h1>Results: Inconsistent directed forgetting effects</h1>
+<div class="row">
+<div class="col-md-6">
+<h2 id="e1-mixed">E1 Mixed</h2>
+<p><img src="poster_files/figure-html/unnamed-chunk-5-1.png" width="100%" /></p>
+</div>
+<div class="col-md-6">
+<h2 id="e2-blocked">E2 Blocked</h2>
+<p><img src="poster_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
+</div>
+</div>
+<div id="conclusions-and-next-steps" class="section level2">
+<h2>Conclusions and Next Steps</h2>
+<ol style="list-style-type: decimal">
+<li>We did not replicate <span class="citation">Ahmad et al. (2019)</span></li>
+<li>We did find a main effect of stimulus duration</li>
+<li>We did not find that reducing stimulus duration systematically increased the directed forgetting effect.</li>
+</ol>
+<ul>
+<li>Our power analysis suggests we need over 200 subjects to reliably detect the higher-order interaction</li>
+<li>Directed forgetting may be limited by the cognitive demands associated with processing the instruction to forget</li>
+</ul>
+</div>
+<div id="poster-information" class="section level2">
+<h2>Poster information</h2>
+<p>This poster was prepared as a computationally reproducible project using <a href="https://www.crumplab.com/vertical/">vertical</a> <span class="citation">(Vuorre &amp; Crump, 2021)</span>, and several libraries from the open-source community.</p>
+</div>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-ahmadDirectedForgettingCategorised2019">
+<p>Ahmad, F. N., Tan, P., &amp; Hockley, W. E. (2019). Directed forgetting for categorised pictures: Recognition memory for perceptual details versus gist. <em>Memory</em>, <em>27</em>(7), 894–903. <a href="https://doi.org/10/gmgg3g">https://doi.org/10/gmgg3g</a></p>
+</div>
+<div id="ref-de2015jspsych">
+<p>De Leeuw, J. R. (2015). JsPsych: A javascript library for creating behavioral experiments in a web browser. <em>Behavior Research Methods</em>, <em>47</em>(1), 1–12.</p>
+</div>
+<div id="ref-gehring1976recognition">
+<p>Gehring, R. E., Toglia, M. P., &amp; Kimble, G. A. (1976). Recognition memory for words and pictures at short and long retention intervals. <em>Memory &amp; Cognition</em>, <em>4</em>(3), 256–260.</p>
+</div>
+<div id="ref-macleodDirectedForgetting1998">
+<p>MacLeod, C. M. (1998). Directed forgetting. In J. M. Golding &amp; C. M. MacLeod (Eds.), <em>Intentional forgetting: Interdisciplinary approaches</em> (pp. 1–57). Lawrence Erlbaum Associates.</p>
+</div>
+<div id="ref-standingLearning10000Pictures1973">
+<p>Standing, L. (1973). Learning 10000 pictures. <em>The Quarterly Journal of Experimental Psychology</em>, <em>25</em>(2), 207–222. <a href="https://doi.org/10/fnjhs5">https://doi.org/10/fnjhs5</a></p>
+</div>
+<div id="ref-vuorre2021sharing">
+<p>Vuorre, M., &amp; Crump, M. J. (2021). Sharing and organizing research products as r packages. <em>Behavior Research Methods</em>, <em>53</em>(2), 792–802.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+</body>
+</html>

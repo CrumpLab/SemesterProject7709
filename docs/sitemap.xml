@@ -58,6 +58,21 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/posters/betterposter/betterposter.html</loc>
+  </url>
+  <url>
+    <loc>/posters/betterposter2/betterposter2.html</loc>
+  </url>
+  <url>
+    <loc>/posters/custom/header.html</loc>
+  </url>
+  <url>
+    <loc>/posters/custom/poster.html</loc>
+  </url>
+  <url>
+    <loc>/posters/posterdown/posterdown/posterdown.html</loc>
+  </url>
+  <url>
     <loc>/readme.html</loc>
   </url>
   <url>

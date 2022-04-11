@@ -75,6 +75,15 @@
     <a class="dropdown-item" href="../slides/ioslides_demo.html">ioslides</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-posters">Posters</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-posters">
+    <a class="dropdown-item" href="../posters/betterposter/betterposter.html">Better Poster 1</a>
+    <a class="dropdown-item" href="../posters/betterposter2/betterposter2.html">Better Poster 2</a>
+    <a class="dropdown-item" href="../posters/posterdown/posterdown.html">Posterdown</a>
+    <a class="dropdown-item" href="../posters/custom/poster.html">custom</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -115,15 +124,15 @@
 <p><img src="lab%206_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">A</span><span class="op">[</span><span class="va">A</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.6409</span></code></pre>
+<pre><code><span class="co">## [1] 0.6366</span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">10000</span>,<span class="fl">20</span>,<span class="fl">.05</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">A</span><span class="op">[</span><span class="va">A</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.6456</span></code></pre>
+<pre><code><span class="co">## [1] 0.6415</span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">A</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/Binomial.html" class="external-link">rbinom</a></span><span class="op">(</span><span class="fl">10000</span>,<span class="fl">50</span>,<span class="fl">.05</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">A</span><span class="op">[</span><span class="va">A</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">10000</span></code></pre></div>
-<pre><code><span class="co">## [1] 0.9227</span></code></pre>
+<pre><code><span class="co">## [1] 0.9207</span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">?</span><span class="va">rbinom</span></code></pre></div>
 <ol start="2" style="list-style-type: lower-alpha">

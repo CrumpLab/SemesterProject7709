@@ -1,0 +1,232 @@
+---
+title: Stimulus duration and directed forgetting for pictures of natural scenes
+author:
+  - name: Patrick Ihejirika
+    affil: 1
+  - name: Matthew J. C. Crump
+    affil: 1
+    orcid: '0000-0002-5612-0090'
+affiliation:
+  - num: 1
+    address: Department of Psychology, Brooklyn College of CUNY
+column_numbers: 3
+logoright_name: https&#58;//raw.githubusercontent.com/brentthorne/posterdown/master/images/betterhexlogo.png
+logoleft_name: imgs/BC_logo.png
+poster_height: "15.75in" #"38in"
+poster_width: "28in" #"45in"
+title_textsize: "350%"
+author_textsize: "170%"
+affiliation_textsize: "150%"
+body_textsize: "175%"
+sectitle_textsize: "175%"
+sectitle2_textsize: "125%"
+primary_colour: "#BEAED4"
+secondary_colour: "#666666"
+accent_colour: "#F0027F"
+css: style.css
+output: 
+  posterdown::posterdown_html:
+    self_contained: false
+    includes:
+      in_header: header.html
+bibliography: Directed_Forgetting.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning=FALSE,
+                      message=FALSE)
+
+library(RColorBrewer)
+library(ggplot2)
+```
+
+# What is Directed Forgetting?
+
+Directed forgetting research investigates people's ability to intentionally forget information [@macleodDirectedForgetting1998]. For example, in a memory task for words participants are instructed to remember some words and forget others for a later memory test. A directed forgetting effect is observed when people show worse memory for the words they attempted to forget. Directed forgetting tasks often use word stimuli, and the limitations of intentional forgetting for other kinds of information remain unclear.
+
+# Can people intentionally forget memorable picture information?
+
+We are investigating directed forgetting for pictures. The picture-superiority effect suggests that pictures are inherently more memorable than words [@gehring1976recognition].  @standingLearning10000Pictures1973 showed that people had little difficulty in memorizing over 10,000 pictures.
+
+## Prior work: Limited Directed Forgetting for Pictures
+
+@ahmadDirectedForgettingCategorised2019 found **limited directed forgetting for pictures** of natural scenes and everyday objects.
+
+:::: {.row}
+::: {.col-md-6 .draw-border}
+
+```{r, out.width="100%"}
+knitr::include_graphics("imgs/Tan_methods_vertical.png")
+```
+
+:::
+
+::: {.col-md-6}
+
+## Prior Results
+
+Reproduction of the results from @ahmadDirectedForgettingCategorised2019.
+
+```{r, out.width="100%"}
+
+tan_et_al <- data.frame(`Proportion Correct` = c(.88,.78,.88,.71),
+                        `Lure Type` = c("novel","exemplar","novel","exemplar"),
+                        `Encoding Cue` = c("Remember","Remember","Forget","Forget"))
+
+ggplot(tan_et_al,aes(x=Lure.Type, y=Proportion.Correct,fill=Encoding.Cue))+
+  geom_bar(stat="identity", position="dodge")+
+  coord_cartesian(ylim=c(.4,1))+
+  geom_hline(yintercept=.5)+
+  scale_y_continuous(breaks = seq(0.4,1,.1))+
+  theme_classic(base_size=20) +
+  ylab("Proportion Correct")+
+  xlab("Lure Type")+
+  scale_fill_brewer(palette = "Accent")+
+  theme_classic(base_size=20)+ggtitle("")+
+  theme(legend.position = "top",
+        plot.margin = unit(c(-2,0,0,0),units="line"),
+        legend.margin = unit(c(-1,0,0,0),units="line"))+
+  labs(fill = "Encoding Cue")
+
+#knitr::include_graphics("imgs/Tan_results.png")
+```
+
+
+- They found a small directed forgetting effect. 
+- The effect was only observed for items given a more difficult recognition test, involving a similar (exemplar) lure.
+
+## What factors determine intentional forgetting of pictures?
+
+
+:::
+::::
+
+# Are pictures easier to forget if they are made less memorable?
+
+
+
+:::: {.row}
+::: {.col-md-6}
+
+## Hypothesis 
+
+1. We assume that the magnitude of directed forgetting is influenced by stimulus encoding strength:
+ - Strongly encoded stimuli are harder to forget
+ - Wakly encoded stimuli are easier to forget
+ 
+2. We propose that decreasing stimulus duration during encoding will make pictures less well encoded, and easier to forget
+
+3. We predict the directed forgetting effect will increase as stimulus duration decreases.
+
+
+:::
+
+::: {.col-md-6}
+
+## Predicted effect of stimulus duration manipulation 
+
+```{r, out.width = '100%'}
+power <- new.env()
+load("../vignettes/data/power.RData", power)
+power$power_analysis$prediction_graph +
+  scale_fill_brewer(palette = "Accent")+
+  theme_classic(base_size=20)+ggtitle("")+
+  theme(legend.position = "top",
+        plot.margin = unit(c(-2,0,0,0),units="line"),
+        legend.margin = unit(c(-1,0,0,0),units="line"))+
+  labs(fill = "Encoding Cue")
+
+```
+
+:::
+::::
+
+
+# Methods: Replication with stimulus duration manipulation
+
+:::: {.row}
+::: {.col-md-6}
+
+- 2 close replications of @ahmadDirectedForgettingCategorised2019.
+- used the same set of natural scenes
+- 47 and 45 participants recruited from Amazon's Mechanical Turk
+
+:::
+
+::: {.col-md-6}
+
+- Programmed the experiment using JsPsych [@de2015jspsych]
+- Participants completed the experiment in their web-browser
+
+:::
+::::
+
+```{r}
+knitr::include_graphics("imgs/Methods.png")
+```
+
+
+<br>
+
+# Results: Inconsistent directed forgetting effects
+
+:::: {.row}
+::: {.col-md-6}
+
+## E1 Mixed
+
+```{r, out.width = '100%'}
+E1 <- new.env()
+load("../vignettes/data/E1/E1_data_write_up.RData", E1)
+E1$Accuracy$graphs$figure+
+  scale_fill_brewer(palette = "Accent")+
+  theme_classic(base_size=20)+ggtitle("")+
+  theme(legend.position = "top",
+        plot.margin = unit(c(-2,0,0,0),units="line"),
+        legend.margin = unit(c(-1,0,0,0),units="line"))+
+  labs(fill = "Encoding Cue")
+```
+
+:::
+
+::: {.col-md-6}
+
+## E2 Blocked
+
+```{r, out.width = '100%'}
+E2 <- new.env()
+load("../vignettes/data/E2/E2_data_write_up.RData", E2)
+E2$Accuracy$graphs$figure+
+  scale_fill_brewer(palette = "Accent")+
+  theme_classic(base_size=20)+ggtitle("")+
+  theme(legend.position = "top",
+        plot.margin = unit(c(-2,0,0,0),units="line"),
+        legend.margin = unit(c(-1,0,0,0),units="line"))+
+  labs(fill = "Encoding Cue")
+```
+
+:::
+::::
+
+## Conclusions and Next Steps
+
+1. We did not replicate @ahmadDirectedForgettingCategorised2019
+2. We did find a main effect of stimulus duration
+3. We did not find that reducing stimulus duration systematically increased the directed forgetting effect.
+
+- Our power analysis suggests we need over 200 subjects to reliably detect the higher-order interaction
+- Directed forgetting may be limited by the cognitive demands associated with processing the instruction to forget
+
+
+
+## Poster information
+
+This poster was prepared as a computationally reproducible project using [vertical](https://www.crumplab.com/vertical/) [@vuorre2021sharing], and several libraries from the open-source community.
+
+```{r, include=FALSE}
+knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
+```
+
+# References

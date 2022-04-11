@@ -75,6 +75,15 @@
     <a class="dropdown-item" href="../slides/ioslides_demo.html">ioslides</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-posters">Posters</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-posters">
+    <a class="dropdown-item" href="../posters/betterposter/betterposter.html">Better Poster 1</a>
+    <a class="dropdown-item" href="../posters/betterposter2/betterposter2.html">Better Poster 2</a>
+    <a class="dropdown-item" href="../posters/posterdown/posterdown.html">Posterdown</a>
+    <a class="dropdown-item" href="../posters/custom/poster.html">custom</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -155,11 +164,11 @@
 <span class="op">}</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">A_pvalue</span><span class="op">[</span><span class="va">A_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.833</span>
+<span class="co">#&gt; [1] 0.802</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">B_pvalue</span><span class="op">[</span><span class="va">B_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.17</span>
+<span class="co">#&gt; [1] 0.164</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">AB_pvalue</span><span class="op">[</span><span class="va">AB_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.157</span></code></pre></div>
+<span class="co">#&gt; [1] 0.16</span></code></pre></div>
 <p>C. How many subjects are needed to detect the interaction effect with power = .8? (2 points)</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># N per group</span>
@@ -187,9 +196,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">A_pvalue</span><span class="op">[</span><span class="va">A_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
 <span class="co">#&gt; [1] 1</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">B_pvalue</span><span class="op">[</span><span class="va">B_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.835</span>
+<span class="co">#&gt; [1] 0.817</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">AB_pvalue</span><span class="op">[</span><span class="va">AB_pvalue</span><span class="op">&lt;</span><span class="fl">0.05</span><span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.815</span></code></pre></div>
+<span class="co">#&gt; [1] 0.813</span></code></pre></div>
 <p>Bonus point question:</p>
 <p>Create a power curve showing how power for the interaction effect in this example is influenced by number of subjects. Choose a range of N from 25 to 800 (per cell) and run a simulation-based power analysis for increments of 25 subjects. Then plot the results using ggplot2 (2 points).</p>
   </main>

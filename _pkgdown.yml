@@ -9,7 +9,7 @@ template:
 
 navbar:
   structure:
-    left:  [articles, Rbasics, pkgdowntips, slides, reference]
+    left:  [articles, Rbasics, pkgdowntips, slides, posters, reference]
     right: [search, github]
   components:
      articles:
@@ -41,6 +41,17 @@ navbar:
       menu:
       - text: ioslides
         href: slides/ioslides_demo.html
+     posters:
+      text: Posters
+      menu:
+      - text: Better Poster 1
+        href: posters/betterposter/betterposter.html
+      - text: Better Poster 2
+        href: posters/betterposter2/betterposter2.html
+      - text: Posterdown
+        href: posters/posterdown/posterdown.html
+      - text: custom
+        href: posters/custom/poster.html
      pkgdowntips:
       text: pkgdown tips
       menu:

@@ -1,0 +1,80 @@
+:root{
+  --primary: #BEAED4;
+  --secondary: #666666;
+  --lightaccent: #FDC086;
+  --darkaccent: #F0027F;
+}
+
+img {
+  margin-top: 0!important;
+}
+
+p {
+  margin-top: .5em!important;
+  margin-bottom: 0!important;
+  font-size: 120%!important;
+}
+
+.poster_title h3 > sup {
+  font-size: 100%!important;
+}
+
+.poster_title h1 {
+  margin-top:1%!important;
+}
+
+.logo_left {
+  width: 10%!important;
+  background-image: linear-gradient(to top, #fff, 30%, var(--primary))!important;
+}
+
+.logo_right {
+  width: 5%!important;
+  background-image: linear-gradient(to top, #fff, 30%, var(--primary))!important;
+}
+
+.poster_body h1 {
+  border: 2mm solid #9a9a9a!important;
+}
+
+.title_container {
+ background-image: linear-gradient(to top, #fff, 30%, var(--primary))!important;
+}
+
+.poster_title h5 {
+  color: var(--secondary)!important;
+  font-size: 150%!important;
+}
+
+.poster_body h2 {
+text-align: left;
+color: var(--secondary)!important;
+font-size: 150%!important;
+border: 1mm solid var(--secondary);
+background-color: var(--lightaccent);
+border-radius: 4mm 0mm;
+margin-top: 2mm;
+margin-bottom: 2mm;
+font-weight: normal;
+}
+
+.hanging-indent {
+  margin-left: 10px!important;
+  text-indent: -10px!important;
+}
+
+.draw-border {
+  border: 1mm solid var(--darkaccent);
+  border-radius: 4mm 0mm;
+  margin-left: 4mm;
+  margin-right: -4mm;
+  margin-top: 2mm;
+  margin-bottom: 4mm;
+  padding-right: -2mm;
+  padding-top: 10mm;
+  padding-bottom: 10mm;
+}
+
+.darkaccent-colour {
+  background-color: var(--darkaccent)!important;
+}

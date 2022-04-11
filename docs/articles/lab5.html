@@ -75,6 +75,15 @@
     <a class="dropdown-item" href="../slides/ioslides_demo.html">ioslides</a>
   </div>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-posters">Posters</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-posters">
+    <a class="dropdown-item" href="../posters/betterposter/betterposter.html">Better Poster 1</a>
+    <a class="dropdown-item" href="../posters/betterposter2/betterposter2.html">Better Poster 2</a>
+    <a class="dropdown-item" href="../posters/posterdown/posterdown.html">Posterdown</a>
+    <a class="dropdown-item" href="../posters/custom/poster.html">custom</a>
+  </div>
+</li>
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -166,7 +175,7 @@
 <span class="va">aov.out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">DV</span> <span class="op">~</span> <span class="va">IV</span>, data <span class="op">=</span> <span class="va">alternative_data</span><span class="op">)</span>
 <span class="va">summary_aov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aov.out</span><span class="op">)</span>
 <span class="va">summary_aov</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">`Pr(&gt;F)`</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; [1] 0.05319951</span>
+<span class="co">#&gt; [1] 2.782246e-05</span>
 
 <span class="co"># calculate eta_squared from anova object</span>
 <span class="fu">effectsize</span><span class="fu">::</span><span class="fu"><a href="https://easystats.github.io/effectsize/reference/eta_squared.html" class="external-link">eta_squared</a></span><span class="op">(</span><span class="va">aov.out</span><span class="op">)</span>
@@ -176,7 +185,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Parameter | Eta2 |       95% CI</span>
 <span class="co">#&gt; -------------------------------</span>
-<span class="co">#&gt; IV        | 0.02 | [0.00, 1.00]</span>
+<span class="co">#&gt; IV        | 0.08 | [0.03, 1.00]</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; - One-sided CIs: upper bound fixed at (1).</span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
@@ -206,14 +215,14 @@
 
 <span class="co"># proportion significant simulations</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">save_results</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span> <span class="op">&lt;</span> <span class="fl">.05</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>
-<span class="co">#&gt; [1] 0.758</span>
+<span class="co">#&gt; [1] 0.731</span>
 
 <span class="co"># effect_size</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">save_results</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span></code></pre></div>
 <p><img src="lab5_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">save_results</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.03759445</span></code></pre></div>
+<span class="co">#&gt; [1] 0.03758065</span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>Power to detect a 5% increase in a multiple choice test?</li>
 </ol>
@@ -245,7 +254,7 @@
 
 <span class="co"># mean_effect size</span>
 <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">save_results</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.06057287</span></code></pre></div>
+<span class="co">#&gt; [1] 0.05912007</span></code></pre></div>
 </div>
   </main>
 </div>
