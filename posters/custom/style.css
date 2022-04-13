@@ -49,7 +49,7 @@ p {
 .poster_body h2 {
 text-align: left;
 color: var(--secondary)!important;
-font-size: 150%!important;
+font-size: 250%!important;
 border: 1mm solid var(--secondary);
 background-color: var(--lightaccent);
 border-radius: 4mm 0mm;
