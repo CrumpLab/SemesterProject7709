@@ -1,0 +1,89 @@
+---
+title: 'Making websites with R'
+author: "Matthew J. C. Crump"
+date: "Last compiled `r format(Sys.time(), '%m/%d/%y')`"
+subtitle: Spring 2022, Welcome!
+output:
+  revealjs::revealjs_presentation:
+    includes:
+      in_header: header.html
+    self_contained: false
+    theme: white
+    transition: fade
+    center: false
+    incremental: true
+    css: style.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(fontawesome)
+```
+
+#  Roadmap
+
+1. R markdown websites
+2. Distill websites
+3. blogdown websites
+
+# R Markdown websites
+
+- [Get started here](https://rmarkdown.rstudio.com/lesson-13.html)
+
+
+# Basic Steps
+
+1. Make a new R studio project
+2. Choose simple R markdown website
+3. Click build website from build tab
+4. Look at your basic website!
+
+# _site.yml
+
+Edit the yml file to change the site navigation bar
+
+```
+name: "my-website"
+navbar:
+  title: "My Website"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+```
+
+# Editing pages
+
+1. `index.Rmd` is the home page, edit it by changing the text in the .Rmd
+2. `about.Rmd` is a sample about page. 
+3. Make new .Rmds, add them to the navbar in `_site.yml'
+4. Rebuild pages
+
+# Hosting
+
+1. Your website could be hosted from any server
+2. upload to your github repo, and host it through github pages
+
+# More complicated websites
+
+There are several R markdown website generators that offer more bells and whistles.
+
+They have a similar general structure to the basic R website:
+
+- a yml file typically controls navigation bar content
+- Rmds are used to write content for individual pages
+- css is used to style everything
+- some sites are set up for easy blogging
+
+# Website with distill
+
+<https://rstudio.github.io/distill/website.html>
+
+# Website with blogdown
+
+<https://bookdown.org/yihui/blogdown/>
+
+<https://www.apreshill.com/blog/2020-12-new-year-new-blogdown/>
+
+
