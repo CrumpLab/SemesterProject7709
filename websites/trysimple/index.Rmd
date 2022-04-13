@@ -1,0 +1,10 @@
+---
+title: "My Website"
+---
+
+This will be on the front page
+
+```{r}
+hist(cars$speed)
+```
+
