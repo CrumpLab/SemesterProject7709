@@ -9,7 +9,7 @@ template:
 
 navbar:
   structure:
-    left:  [articles, Rbasics, pkgdowntips, slides, posters, reference]
+    left:  [articles, Rbasics, pkgdowntips, slides, posters, reference, book]
     right: [search, github]
   components:
      articles:
@@ -61,3 +61,6 @@ navbar:
         href: articles/pkgdownTips/tips.html
       - text: styling tips
         href: articles/pkgdownTips/styling.html
+     book:
+      text: book
+      href: book/index.html
