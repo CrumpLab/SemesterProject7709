@@ -191,21 +191,289 @@ As you work, you may start a local server to live preview this HTML book. This p
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{hello-bookdown}{%
-\chapter{Hello bookdown}\label{hello-bookdown}}
+\hypertarget{lab-1}{%
+\chapter{Lab 1}\label{lab-1}}
 
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (\texttt{\#}) per .Rmd file.
+Download the Lab1\_data.xlsx data file. This file contains fake data for a 2x3x2 repeated measures design, for 10 participants. The data is in wide format. Here is the link.
 
-\hypertarget{a-section}{%
-\section{A section}\label{a-section}}
+\url{https://github.com/CrumpLab/rstatsmethods/raw/master/vignettes/Stats2/Lab1_data.xlsx}
 
-All chapter sections start with a second-level (\texttt{\#\#}) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+Your task is to convert the data to long format, and store the long-format data in a data.frame or tibble. Print out some of the long-form data in your lab1.Rmd, to show that you did make the appropriate conversion. For extra fun, show two different ways to solve the problem.
 
-\hypertarget{an-unnumbered-section}{%
-\subsection*{An unnumbered section}\label{an-unnumbered-section}}
-\addcontentsline{toc}{subsection}{An unnumbered section}
+If you need to modify the excel by hand to help you solve the problem that is OK, just make a note of it in your lab work.
 
-Chapters and sections are numbered by default. To un-number a heading, add a \texttt{\{.unnumbered\}} or the shorter \texttt{\{-\}} at the end of the heading, like in this section.
+\hypertarget{solution}{%
+\section{Solution}\label{solution}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# read in data}
+\FunctionTok{library}\NormalTok{(readxl)}
+\CommentTok{\#\textgreater{} Warning: package \textquotesingle{}readxl\textquotesingle{} was built under R version 4.1.2}
+
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{)}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...1\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...12\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...13\textasciigrave{}}
+
+\CommentTok{\# need to handle the column headers}
+
+\CommentTok{\# input only column headers}
+\NormalTok{wide\_headers }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{,}
+                          \AttributeTok{range =} \StringTok{"B1:M3"}\NormalTok{, }
+                          \AttributeTok{col\_names=}\ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...1\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...2\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...8\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...12\textasciigrave{}}
+
+\CommentTok{\# extract individual levels, and repeat level to fill design}
+\NormalTok{IV1 }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(wide\_headers[}\DecValTok{1}\NormalTok{,])}
+\NormalTok{IV1 }\OtherTok{\textless{}{-}}\NormalTok{ IV1[}\FunctionTok{is.na}\NormalTok{(IV1) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{]}
+\NormalTok{IV1 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(IV1, }\AttributeTok{each =} \DecValTok{6}\NormalTok{)}
+
+\NormalTok{IV2 }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(wide\_headers[}\DecValTok{2}\NormalTok{,])}
+\NormalTok{IV2 }\OtherTok{\textless{}{-}}\NormalTok{ IV2[}\FunctionTok{is.na}\NormalTok{(IV2) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{]}
+\NormalTok{IV2 }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(IV2, }\AttributeTok{each=}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{IV3 }\OtherTok{\textless{}{-}} \FunctionTok{as.character}\NormalTok{(wide\_headers[}\DecValTok{3}\NormalTok{,])}
+\NormalTok{IV3 }\OtherTok{\textless{}{-}}\NormalTok{ IV3[}\FunctionTok{is.na}\NormalTok{(IV3) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{]}
+
+\CommentTok{\# create a single row version of column headers}
+\NormalTok{one\_row\_header }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(IV1,IV2,IV3, }\AttributeTok{sep=}\StringTok{"\_"}\NormalTok{)}
+
+\CommentTok{\# read in data again, skipping unnecessary column headers}
+
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{, }\AttributeTok{skip =} \DecValTok{2}\NormalTok{)}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...2\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...8\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}A\textasciigrave{} {-}\textgreater{} \textasciigrave{}A...12\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}B\textasciigrave{} {-}\textgreater{} \textasciigrave{}B...13\textasciigrave{}}
+
+\CommentTok{\# replace names with new column headers }
+
+\FunctionTok{names}\NormalTok{(wide\_data)[}\DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ one\_row\_header}
+
+\CommentTok{\# use pivot\_longer to convert to long}
+
+\FunctionTok{library}\NormalTok{(tidyr)}
+\CommentTok{\#\textgreater{} Warning: package \textquotesingle{}tidyr\textquotesingle{} was built under R version 4.1.2}
+
+\NormalTok{long\_data }\OtherTok{\textless{}{-}}\NormalTok{ wide\_data }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pivot\_longer}\NormalTok{(}
+  \AttributeTok{cols =} \DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{,}
+  \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"Loudness"}\NormalTok{,}\StringTok{"Time"}\NormalTok{,}\StringTok{"Letter"}\NormalTok{),}
+  \AttributeTok{names\_pattern =} \StringTok{"(.*)\_(.*)\_(.*)"}\NormalTok{,}
+  \AttributeTok{values\_to =} \StringTok{"DV"}
+\NormalTok{)}
+
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(long\_data))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{tabular}{r|l|l|l|r}
+\hline
+Participant & Loudness & Time & Letter & DV\\
+\hline
+1 & Noisy & Morning & A & 61\\
+\hline
+1 & Noisy & Morning & B & 77\\
+\hline
+1 & Noisy & Afternoon & A & 97\\
+\hline
+1 & Noisy & Afternoon & B & 97\\
+\hline
+1 & Noisy & Evening & A & 89\\
+\hline
+1 & Noisy & Evening & B & 94\\
+\hline
+\end{tabular}
+
+\hypertarget{other-solutions}{%
+\section{other solutions}\label{other-solutions}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create IVs by hand}
+\NormalTok{Loudness }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{( }\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Noisy"}\NormalTok{,}\StringTok{"Quiet"}\NormalTok{),}\AttributeTok{each=}\DecValTok{6}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\NormalTok{Time     }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{( }\FunctionTok{rep}\NormalTok{(}\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Morning"}\NormalTok{,}\StringTok{"Afternoon"}\NormalTok{,}\StringTok{"Evening"}\NormalTok{),}\AttributeTok{each=}\DecValTok{2}\NormalTok{),}\DecValTok{2}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\NormalTok{Letter   }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{( }\FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"A"}\NormalTok{,}\StringTok{"B"}\NormalTok{),}\DecValTok{6}\NormalTok{), }\DecValTok{10}\NormalTok{)}
+\NormalTok{Participant }\OtherTok{\textless{}{-}} \FunctionTok{rep}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{10}\NormalTok{, }\AttributeTok{each =} \DecValTok{12}\NormalTok{)}
+
+\CommentTok{\#load rectangle containing data}
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{,}
+                          \AttributeTok{range =} \StringTok{"B4:M13"}\NormalTok{, }
+                          \AttributeTok{col\_names=}\ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...1\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...2\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...8\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...12\textasciigrave{}}
+
+\CommentTok{\# convert matrix to a single vector (concatenate)}
+\NormalTok{long\_dv }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\FunctionTok{t}\NormalTok{(}\FunctionTok{as.matrix}\NormalTok{(wide\_data)))}
+
+\CommentTok{\#assemble data.frame}
+
+\NormalTok{long\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(Participant,}
+\NormalTok{                        Loudness,}
+\NormalTok{                        Time, }
+\NormalTok{                        Letter,}
+                        \AttributeTok{DV=}\NormalTok{long\_dv)}
+
+\FunctionTok{head}\NormalTok{(long\_data)}
+\CommentTok{\#\textgreater{}   Participant Loudness      Time Letter DV}
+\CommentTok{\#\textgreater{} 1           1    Noisy   Morning      A 61}
+\CommentTok{\#\textgreater{} 2           1    Noisy   Morning      B 77}
+\CommentTok{\#\textgreater{} 3           1    Noisy Afternoon      A 97}
+\CommentTok{\#\textgreater{} 4           1    Noisy Afternoon      B 97}
+\CommentTok{\#\textgreater{} 5           1    Noisy   Evening      A 89}
+\CommentTok{\#\textgreater{} 6           1    Noisy   Evening      B 94}
+\end{Highlighting}
+\end{Shaded}
+
+Using loops and logic, and a minimum of other functions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# load data}
+
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{,}\AttributeTok{col\_names =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...1\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...2\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...8\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...12\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...13\textasciigrave{}}
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(wide\_data)}
+
+\CommentTok{\# Create vectors of level names for each IV}
+\CommentTok{\# use a for loop to process the first three rows of wide\_data}
+
+\NormalTok{Loudness }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\NormalTok{Time }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\NormalTok{Letter }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{) \{}
+  
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{1}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{ ) Loudness[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ wide\_data[}\DecValTok{1}\NormalTok{,i]}
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{1}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{ ) Loudness[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ Loudness[i}\DecValTok{{-}2}\NormalTok{]}
+  
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{2}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{ ) Time[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ wide\_data[}\DecValTok{2}\NormalTok{,i]}
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{2}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{ ) Time[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ Time[i}\DecValTok{{-}2}\NormalTok{]}
+  
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{3}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{FALSE}\NormalTok{ ) Letter[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ wide\_data[}\DecValTok{3}\NormalTok{,i]}
+  \ControlFlowTok{if}\NormalTok{ ( }\FunctionTok{is.na}\NormalTok{(wide\_data[}\DecValTok{3}\NormalTok{,i]) }\SpecialCharTok{==} \ConstantTok{TRUE}\NormalTok{ ) Letter[i}\DecValTok{{-}1}\NormalTok{] }\OtherTok{\textless{}{-}}\NormalTok{ Letter[i}\DecValTok{{-}2}\NormalTok{]}
+\NormalTok{\}}
+
+\CommentTok{\# Create a long data frame using a for loop}
+
+\NormalTok{long\_data }\OtherTok{\textless{}{-}}  \FunctionTok{data.frame}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{(i }\ControlFlowTok{in} \DecValTok{4}\SpecialCharTok{:}\DecValTok{13}\NormalTok{)\{ }\CommentTok{\# rows}
+  \ControlFlowTok{for}\NormalTok{(j }\ControlFlowTok{in} \DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{) \{ }\CommentTok{\# columns}
+\NormalTok{    temp\_row }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Participant =}\NormalTok{ wide\_data[i,}\DecValTok{1}\NormalTok{],}
+                           \AttributeTok{Loudness =}\NormalTok{ Loudness[j}\DecValTok{{-}1}\NormalTok{],}
+                           \AttributeTok{Time =}\NormalTok{ Time[j}\DecValTok{{-}1}\NormalTok{],}
+                           \AttributeTok{Letter =}\NormalTok{ Letter[j}\DecValTok{{-}1}\NormalTok{],}
+                           \AttributeTok{DV =}\NormalTok{ wide\_data[i,j])}
+\NormalTok{    long\_data }\OtherTok{\textless{}{-}} \FunctionTok{rbind}\NormalTok{(long\_data,temp\_row)}
+\NormalTok{  \}}
+\NormalTok{\}}
+
+\FunctionTok{head}\NormalTok{(long\_data)}
+\CommentTok{\#\textgreater{}   Participant Loudness      Time Letter DV}
+\CommentTok{\#\textgreater{} 1           1    Noisy   Morning      A 61}
+\CommentTok{\#\textgreater{} 2           1    Noisy   Morning      B 77}
+\CommentTok{\#\textgreater{} 3           1    Noisy Afternoon      A 97}
+\CommentTok{\#\textgreater{} 4           1    Noisy Afternoon      B 97}
+\CommentTok{\#\textgreater{} 5           1    Noisy   Evening      A 89}
+\CommentTok{\#\textgreater{} 6           1    Noisy   Evening      B 94}
+\end{Highlighting}
+\end{Shaded}
+
+Using the \texttt{zoo:na.locf} function to fill level names to the right. This uses only a few lines, but it comes at the expense of low readability, and lots of nested function calls that are hard to parse and understand.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{wide\_data }\OtherTok{\textless{}{-}} \FunctionTok{as.data.frame}\NormalTok{(}\FunctionTok{read\_xlsx}\NormalTok{(}\StringTok{"data/Lab1\_data.xlsx"}\NormalTok{,}\AttributeTok{col\_names =} \ConstantTok{FALSE}\NormalTok{))}
+\CommentTok{\#\textgreater{} New names:}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...1\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...2\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...3\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...4\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...5\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...6\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...7\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...8\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...9\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...10\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...11\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...12\textasciigrave{}}
+\CommentTok{\#\textgreater{} * \textasciigrave{}\textasciigrave{} {-}\textgreater{} \textasciigrave{}...13\textasciigrave{}}
+\NormalTok{the\_scores }\OtherTok{\textless{}{-}}\NormalTok{ wide\_data[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{13}\NormalTok{,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{13}\NormalTok{]}
+\FunctionTok{names}\NormalTok{(the\_scores) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(wide\_data[}\DecValTok{3}\NormalTok{,}\DecValTok{1}\NormalTok{],}\FunctionTok{apply}\NormalTok{(zoo}\SpecialCharTok{::}\FunctionTok{na.locf}\NormalTok{(}\FunctionTok{t}\NormalTok{(wide\_data[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{,}\DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{])),}\DecValTok{1}\NormalTok{,paste, }\AttributeTok{collapse=}\StringTok{"\_"}\NormalTok{))}
+
+\NormalTok{long\_data }\OtherTok{\textless{}{-}}\NormalTok{ the\_scores }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{pivot\_longer}\NormalTok{(}
+  \AttributeTok{cols =} \DecValTok{2}\SpecialCharTok{:}\DecValTok{13}\NormalTok{,}
+  \AttributeTok{names\_to =} \FunctionTok{c}\NormalTok{(}\StringTok{"Loudness"}\NormalTok{,}\StringTok{"Time"}\NormalTok{,}\StringTok{"Letter"}\NormalTok{),}
+  \AttributeTok{names\_pattern =} \StringTok{"(.*)\_(.*)\_(.*)"}\NormalTok{,}
+  \AttributeTok{values\_to =} \StringTok{"DV"}
+\NormalTok{)}
+
+\FunctionTok{head}\NormalTok{(long\_data)}
+\CommentTok{\#\textgreater{} \# A tibble: 6 x 5}
+\CommentTok{\#\textgreater{}   Participant Loudness Time      Letter DV   }
+\CommentTok{\#\textgreater{}   \textless{}chr\textgreater{}       \textless{}chr\textgreater{}    \textless{}chr\textgreater{}     \textless{}chr\textgreater{}  \textless{}chr\textgreater{}}
+\CommentTok{\#\textgreater{} 1 1           Noisy    Morning   A      61   }
+\CommentTok{\#\textgreater{} 2 1           Noisy    Morning   B      77   }
+\CommentTok{\#\textgreater{} 3 1           Noisy    Afternoon A      97   }
+\CommentTok{\#\textgreater{} 4 1           Noisy    Afternoon B      97   }
+\CommentTok{\#\textgreater{} 5 1           Noisy    Evening   A      89   }
+\CommentTok{\#\textgreater{} 6 1           Noisy    Evening   B      94}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{cross}{%
 \chapter{Cross-references}\label{cross}}

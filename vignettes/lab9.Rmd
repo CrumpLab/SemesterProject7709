@@ -1,0 +1,218 @@
+---
+title: "lab9"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{lab9}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SemesterProject7709)
+```
+
+1. Create an R script that can generate simulated data for the following repeated measures design. (2 points)
+
+  A. The dependent variable is assumed to come from a normal distribution with mean = 0 and standard deviation = 1.
+
+  B. There is one repeated measures factor with 5 levels (Down1, Down2, Control, Up1, Up2). The control group is assumed to have no effect. The Down1 and Down2 levels shift the mean down by 1 and 2 standard deviations, respectively. The Up1 and Up2 levels shift the mean up by 1 and 2 standard deviations, respectively.
+
+  C. There are 6 subjects in the experiment, and they are each measured once in each condition. The 6 subjects are assumed to be different from one another (e.g., they will  have different baseline means in the control condition), but they will all be influenced by the IV in the exact same way (e.g., no interaction).
+
+```{r}
+
+subject_control <- rnorm(6,0,1)
+
+make_one_subject_data <- function(){
+  
+}
+
+make_one_subject_data()
+
+subnum <- 1
+subject_baseline <- rnorm(1,0,1)
+
+up2 <- rnorm(n = 1,
+               mean = subject_baseline+2,
+               sd = 1)
+up1 <- rnorm(n = 1,
+               mean = subject_baseline+1,
+               sd = 1)
+control <- rnorm(1,subject_baseline,1)
+down1 <- rnorm(n = 1,
+               mean = subject_baseline-1,
+               sd = 1)
+down2 <- rnorm(n = 1,
+               mean = subject_baseline-2,
+               sd = 1)
+
+sim_subject <- data.frame(Subject = rep(subnum,5),
+                          IV = c("Up2","Up1","Control","Down1","Down2"),
+                          DV = c(up2,up1,control,down1,down2)
+                          )
+
+
+```
+
+```{r}
+
+make_one_subject_data <- function(){
+  subnum <- 1
+  subject_baseline <- rnorm(1,0,1)
+  
+  up2 <- rnorm(n = 1,
+                 mean = subject_baseline+2,
+                 sd = 1)
+  up1 <- rnorm(n = 1,
+                 mean = subject_baseline+1,
+                 sd = 1)
+  control <- rnorm(1,subject_baseline,1)
+  down1 <- rnorm(n = 1,
+                 mean = subject_baseline-1,
+                 sd = 1)
+  down2 <- rnorm(n = 1,
+                 mean = subject_baseline-2,
+                 sd = 1)
+  
+  sim_subject <- data.frame(Subject = rep(subnum,5),
+                            IV = c("Up2","Up1","Control","Down1","Down2"),
+                            DV = c(up2,up1,control,down1,down2)
+                            )
+  
+  return(sim_subject)
+}
+
+make_one_subject_data()
+
+```
+
+
+
+
+
+```{r}
+
+
+one_factor_rm_sim <- function(nsubs,
+                              level_names, 
+                              level_means, 
+                              level_sds, 
+                              subject_means,
+                              subject_sds){
+  
+  shift_factor <- c(sapply(X = subject_means, FUN = function(x) {rnorm(n=length(level_names),mean=x,sd=subject_sds)} ))
+  
+  sim_data <- data.frame(subject = as.factor(rep(1:nsubs,each = length(level_names) )),
+                         IV = as.factor(rep(level_names,nsubs)),
+                         DV = rnorm(n = nsubs*length(level_names),
+                                    mean = level_means,
+                                    sd = level_sds) + shift_factor
+                         )
+  
+  return(sim_data)
+  
+}
+
+
+
+rnorm(10,c(-2,-1,0,1,2))
+
+rnorm(10,c(-5,5))
+
+sub_means <- rnorm(2,0,1)
+rnorm(5,sub_means[1],1)
+rnorm(5,sub_means[2],1)
+
+?sapply
+
+add_one <- function(x){
+  return(x+1)
+}
+
+add_one(1)
+
+(1:5) + 1
+
+sapply(X=1:5,rnorm)
+
+c(sapply(X = c(-2,-1,0,1,2), FUN = function(x) {rnorm(n=5,mean=x,sd=.1)} ))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+
+# rm design without specifying subject means
+one_factor_rm_data <- function(nsubs,names,means,sds){
+  sim_data <- data.frame(subject = rep(1:nsubs,each=length(names)),
+                         IV = names,
+                         DV = rnorm(nsubs,means,sds))
+  return(sim_data)
+}
+
+one_factor_rm_data(nsubs = 5,
+                   names = 1:5,
+                   means = 1:5,
+                   sds = rep(.1,5)
+                   )
+
+```
+
+```{r}
+
+# rm design with specifying subject means
+one_factor_rm_data2 <- function(nsubs,
+                               level_names,
+                               level_means,
+                               level_sds,
+                               s_means,
+                               s_sds){
+  
+  level_dv <- rnorm(nsubs,level_means,level_sds)
+  sub_dv <- rnorm(nsubs,s_means,s_sds)
+  
+  sim_data <- data.frame(subject = as.factor(rep(1:nsubs,
+                                       each=length(level_names))),
+                         IV = as.factor(level_names),
+                         DV = level_dv+sub_dv)
+  return(sim_data)
+}
+
+one_factor_rm_data2(nsubs = 5,
+                   level_names = 1:5,
+                   level_means = 1:5,
+                   level_sds = rep(.1,5),
+                   s_means = rnorm(5,0,1),
+                   s_sds = rep(1,5)
+                   )
+
+```
+
+
+

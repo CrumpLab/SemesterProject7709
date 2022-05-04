@@ -5,8 +5,9 @@ about
 usage
 render-book
 preview-book
-hello-bookdown
-a-section
+lab-1
+solution
+other-solutions
 cross
 chapters-and-sub-chapters
 captioned-figures-and-tables

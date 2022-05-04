@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Make your own title"
+author: "Matt Crump"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
