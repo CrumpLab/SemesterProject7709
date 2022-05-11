@@ -1,0 +1,28 @@
+---
+title: "sem"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sem}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SemesterProject7709)
+```
+
+This is how to use the sem function
+
+```{r}
+sem(1:5)
+```
+
+$\frac{\sigma}{\sqrt{N}}$
+
